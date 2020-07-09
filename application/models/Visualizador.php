@@ -100,10 +100,41 @@ class Visualizador extends CI_Model {
     }
 
     //
-    function cargarLlamados() {
+    function guardarLlamadoR() {
+        //capturar Valores enviados por post
+        $habitacion = $this->input->post("habitacion");
+        $caba = $this->input->post("caba");
+        $estado = $this->input->post("estado");
+        //
+        $datos = array(
+            'llam_habitacion' => $habitacion,
+            'llam_cama_bano' => $caba,
+            'llam_estado' => $estado,
+            'llam_hora' => date('h:i:s'),
+            'llam_fecha' => date('Y-m-d')
+        );
+        //
+        if ($this->db->insert('llamado_reporte', $datos)) {
+            //
+            return 'guardado';
+        } else {
+            //
+            return 'error';
+        }
+    }
+
+    //
+    function cargarLlamados($valor) {
+        //
+        $order = 'asc';
+        //
+        if ($valor === 2) {
+            //
+            $order = 'desc';
+        }
         //
         $query = $this->db->query("SELECT llam_habitacion, llam_cama_bano, "
-                . "llam_hora FROM llamado order by llam_id asc");
+                . "llam_hora FROM llamado order by llam_id $order");
         //
         $datos = array();
         //
@@ -121,5 +152,26 @@ class Visualizador extends CI_Model {
         //
         return $datos;
     }
-    
+
+    //
+    function cargarCodigoAzules() {
+        //
+        $query = $this->db->query("SELECT coaz_codigo, coaz_descripcion FROM codigo_azul");
+        //
+        $datos = array();
+        //
+        if (count($query->result()) > 0) {
+            //
+            foreach ($query->result() as $row) {
+                //
+                array_push($datos, array(
+                    'codigo' => (int) $row->coaz_codigo,
+                    'descripcion' => $row->coaz_descripcion
+                ));
+            }
+        }
+        //
+        return $datos;
+    }
+
 }

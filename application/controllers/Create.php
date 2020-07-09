@@ -34,4 +34,12 @@ class Create extends CI_Controller {
         echo json_encode($rsp);
     }
 
+    //
+    function guardarLlamadoR(){
+        //
+        $rsp = $this->Visualizador->guardarLlamadoR();
+        //
+        echo json_encode($rsp);
+    }
+
 }

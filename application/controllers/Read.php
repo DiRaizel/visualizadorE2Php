@@ -77,7 +77,23 @@ class Read extends CI_Controller {
     //
     function cargarLlamados(){
         //
-        $rsp = $this->Visualizador->cargarLlamados();
+        $rsp = $this->Visualizador->cargarLlamados(1);
+        //
+        echo json_encode($rsp);
+    }
+    
+    //
+    function cargarLlamadosV(){
+        //
+        $rsp = $this->Visualizador->cargarLlamados(2);
+        //
+        echo json_encode($rsp);
+    }
+    
+    //
+    function cargarCodigoAzules(){
+        //
+        $rsp = $this->Visualizador->cargarCodigoAzules();
         //
         echo json_encode($rsp);
     }
