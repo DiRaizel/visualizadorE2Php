@@ -47,7 +47,7 @@ class Visualizador extends CI_Model {
         //capturar Valores enviados por post
         $habitacion = $this->input->post("habitacion");
         $caba = $this->input->post("caba");
-        $estado = $this->input->post("estado");
+        $estado = (int) $this->input->post("estado");
         $codAzul = $this->input->post("codAzul");
         //
         $datos = array(
@@ -89,12 +89,15 @@ class Visualizador extends CI_Model {
             }
         } else {
             //
-            if ($this->db->insert('llamado', $datos)) {
+            if ($estado == 1) {
                 //
-                return 'guardado';
-            } else {
-                //
-                return 'error';
+                if ($this->db->insert('llamado', $datos)) {
+                    //
+                    return 'guardado';
+                } else {
+                    //
+                    return 'error';
+                }
             }
         }
     }
@@ -156,7 +159,8 @@ class Visualizador extends CI_Model {
     //
     function cargarCodigoAzules() {
         //
-        $query = $this->db->query("SELECT coaz_codigo, coaz_descripcion FROM codigo_azul");
+        $query = $this->db->query("SELECT coaz_codigo, coaz_descripcion FROM "
+                . "codigo_azul where coaz_estado = 'ACTIVO'");
         //
         $datos = array();
         //
