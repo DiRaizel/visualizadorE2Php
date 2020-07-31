@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://192.168.0.17/visualizadorE2Php/';
+$config['base_url'] = 'http://192.168.0.24/visualizadorE2Php/';
 //$config['base_url'] = 'http://167.71.248.182/phpVisualizadores/visualizadorE2Php/';
 
 /*
